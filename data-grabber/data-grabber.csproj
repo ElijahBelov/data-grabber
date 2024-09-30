@@ -9,7 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="IN\" />
     <Folder Include="OUT\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.67" />
+    <PackageReference Include="log4net" Version="3.0.1" />
   </ItemGroup>
 
 </Project>
