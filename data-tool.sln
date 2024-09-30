@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "data-grabber", "data-grabbe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "page-retriever", "page-retriever\page-retriever.csproj", "{4C327086-A928-4C3C-BEA0-85B5F8942C04}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{3132311B-51CB-4EE7-9042-C018CF4A7BD0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{4C327086-A928-4C3C-BEA0-85B5F8942C04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C327086-A928-4C3C-BEA0-85B5F8942C04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C327086-A928-4C3C-BEA0-85B5F8942C04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3132311B-51CB-4EE7-9042-C018CF4A7BD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3132311B-51CB-4EE7-9042-C018CF4A7BD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3132311B-51CB-4EE7-9042-C018CF4A7BD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3132311B-51CB-4EE7-9042-C018CF4A7BD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
