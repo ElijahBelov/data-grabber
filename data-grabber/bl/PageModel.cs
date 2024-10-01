@@ -1,13 +1,13 @@
 ﻿namespace data_grabber.bl
 {
-    internal class PageModel
+    internal class PageModel(IDictionary<string, string> dataPoints)
     {
-        private readonly IDictionary<string, string> dataPoints;
-
-        public PageModel(IDictionary<string, string> dataPoints) => this.dataPoints = dataPoints;
+        private readonly IDictionary<string, string> dataPoints = dataPoints;
 
         public ICollection<string> DataPoints => dataPoints.Keys;
 
-        public string Location(string key) => dataPoints[key];
+        public string Key => dataPoints["TICKER"];
+
+        public string XPath(string key) => dataPoints[key];
     }
 }
