@@ -1,4 +1,4 @@
-﻿using datatool_common;
+﻿using Common;
 using log4net;
 
 
@@ -26,18 +26,25 @@ namespace page_retriever
                 Reader reader = new(in_path, ticker_file_name);
                 log.Info("Starting file writing");
 
-                string[] info = reader.GetInfo();
-                while (info.Length > 0)
+                TickerInfo info = reader.GetInfo();
+                while (!info.isLastLine)
                 {
-                    log.Info("Read " + info[0] + "  " + info[1]);
-                    string info_path = Path.Combine(out_path, info[0] + ".html");
-                    Writer writer = new(out_path, info[0] + ".html");
+                    string baseUri = "https://research.investors.com/";
+                    log.Info("Read " + info.symbol + "  " + info.url);
+                    Writer writer = new(out_path, info.symbol + ".html");
+                    log.Info("Http requesting at " + info.url);
+                    string path = info.url.Replace(baseUri, "");
+                    Task task = writer.Request(path);
+                    task.Wait();
+                    log.Info("Done http request");
                     log.Info("Writing to " + Path.Combine(out_path, out_file_name));
-                    writer.Request(info[1]);
+                    writer.Write();
+                    log.Info("Done writing");
+
                     info = reader.GetInfo();
                     writer.Close();
                 }
-
+                log.Info("Done all reading and writing");
                 reader.Close();
             }
             catch (Exception ex)
