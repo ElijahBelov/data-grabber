@@ -17,18 +17,18 @@ Takes care of #2
 Root
 - exe
 - process.log
-- In
+- `In`
   - list.txt
-- Out
-  - Date
+- `Out`
+  - `Date`
     - key.html
 
-List.txt is a CSV file with KEY - URL pairs
+`List.txt` is a CSV file with KEY - URL pairs
 
 ## Operation
 
 1. Looks in /`In`/`list.txt` and for each line downloads a page
-2. Saves page locally as /Out/`date of run`/`KEY`.html
+2. Saves page locally as /`Out`/`date of run`/`KEY`.html
 3. Produces a `process.log` file with processed KEYs and failures if any
 
 # data-grabber
@@ -43,25 +43,25 @@ Takes care of #3 and #4
 Root
 - exe
 - process.log
-- In
+- `In`
   - key.html's
-- Pending
+- `Pending`
   - key.html
-- Processed
-  - Date
+- `Processed`
+  - `Date`
     - key.html's
-- Failed
+- `Failed`
   - key.html's
-- Out
+- `Out`
   - data.csv
 
 ## Operation
 
 1. Looks in /`In` folder for any `key.html` and for each
-2. Moves file into `Pending` folder
+2. Moves file into /`Pending` folder
 3. Parces HTML extracting info
-4. Upon success moves file from `Pending` into `Processed` folder
-5. On error moves file from `Pending` into `Failed` folder
-6. Save extracted info in `Out`/`data.csv`
+4. Upon success moves file from /`Pending` into /`Processed` folder
+5. On error moves file from /`Pending` into /`Failed` folder
+6. Save extracted info in /`Out`/`data.csv`
 7. Produces a `process.log` file with processed KEYs and failures if any
 
