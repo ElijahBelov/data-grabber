@@ -52,7 +52,7 @@ Root
     - key.html's
 - Failed
   - key.html's
-- Result
+- Out
   - data.csv
 
 ## Operation
@@ -62,6 +62,6 @@ Root
 3. Parces HTML extracting info
 4. Upon success moves file from `Pending` into `Processed` folder
 5. On error moves file from `Pending` into `Failed` folder
-6. Save extracted info in `Result`/`data.csv`
+6. Save extracted info in `Out`/`data.csv`
 7. Produces a `process.log` file with processed KEYs and failures if any
 
