@@ -1,7 +1,6 @@
 ﻿using datatool_common;
 using log4net;
-using log4net.Util;
-using System.Text;
+
 
 namespace page_retriever
 {
@@ -10,7 +9,7 @@ namespace page_retriever
         private static readonly string in_path = "..\\in";
         private static readonly string ticker_file_name = "tickers.txt";
 
-        private static readonly string work_path = "../working";
+        //private static readonly string work_path = "../working";
 
         private static readonly string out_path = "..\\out";
         private static readonly string out_file_name = "result.txt";
@@ -18,30 +17,37 @@ namespace page_retriever
 
         static void Main(string[] args)
         {
-            // In order to set the level for a logger and add an appender reference you
-            // can then use the following calls:
             ILog log = LogManaging.CreateLog(Path.Combine(out_path, log_file_name));
-            log.Info("message123");
+            log.Info("Starting program for page retrieval");
 
             try
             {
+                log.Info("Starting ticker file reading at " + Path.Combine(in_path, ticker_file_name));
+                Reader reader = new(in_path, ticker_file_name);
+                log.Info("Starting file writing");
 
-                //LogWriter log_writer = new(out_path, log_file_name);
-                //log_writer.StartLogging();
+                string[] info = reader.GetInfo();
+                while (info.Length > 0)
+                {
+                    log.Info("Read " + info[0] + "  " + info[1]);
+                    string info_path = Path.Combine(out_path, info[0] + ".html");
+                    Writer writer = new(out_path, info[0] + ".html");
+                    log.Info("Writing to " + Path.Combine(out_path, out_file_name));
+                    writer.Request(info[1]);
+                    info = reader.GetInfo();
+                    writer.Close();
+                }
 
-                //log_writer.Close();
+                reader.Close();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Exception: " + ex.Message);
+                log.Error("Exception: " + ex.Message);
             }
             finally
             {
 
             }
-            //Reader reader = new(in_path, ticker_file_name, work_path);
-            //Writer writer = new(out_path, out_file_name);
-            //writer.Close();
 
         }
     }

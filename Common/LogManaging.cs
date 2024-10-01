@@ -46,7 +46,7 @@ namespace datatool_common
             appender.AppendToFile = true;
 
             PatternLayout layout = new PatternLayout();
-            layout.ConversionPattern = "%d [%t] %-5p %c [%x] - %m%n";
+            layout.ConversionPattern = "%d [%t] %-5p %c - %m%n";
             layout.ActivateOptions();
 
             appender.Layout = layout;
