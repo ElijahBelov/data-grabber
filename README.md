@@ -2,7 +2,7 @@
 
 1. Compile list of KEY=URL
 2. Get page by key, save locally
-3. Parce page, extract info
+3. parse page, extract info
 4. Save infos into single file
 5. Import file into Excel
 
@@ -35,7 +35,7 @@ Root
 
 Takes care of #3 and #4
 
-3. Parce page, extract info
+3. parse page, extract info
 4. Save infos into single file
 
 ## Folder structure
@@ -59,7 +59,7 @@ Root
 
 1. Looks in /`In` folder for any `key.html` and for each
 2. Moves file into /`Pending` folder
-3. Parces HTML extracting info
+3. parses HTML extracting info
 4. Upon success moves file from /`Pending` into /`Processed` folder
 5. On error moves file from /`Pending` into /`Failed` folder
 6. Save extracted info in /`Out`/`data.csv`
