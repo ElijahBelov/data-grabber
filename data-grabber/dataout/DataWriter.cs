@@ -12,9 +12,28 @@ namespace data_grabber.dataout
 
         private readonly string path = path;
 
+        public bool OutFileExists => Path.Exists(path);
+
+        public void WriteHeader()
+        {
+            File.AppendAllText(path, HeaderLine());
+        }
+
         public void AddLine(PageData data)
         {
             File.AppendAllText(path, ToSingleLine(data));
+        }
+
+        private static string? HeaderLine()
+        {
+            return "Ticker\t"
+                + "Composite Rating\t"
+                + "EPS Rating\t"
+                + "RS Rating\t"
+                + "Group RS Rating\t"
+                + "SMR Rating\t"
+                + "Acc/Dis Rating\t"
+                + "ER Date";
         }
 
         private static string? ToSingleLine(PageData data)

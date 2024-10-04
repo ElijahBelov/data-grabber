@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="bl\OutputDataHandler.cs~RF1986c137.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="IN\" />
   </ItemGroup>
 

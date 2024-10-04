@@ -1,10 +1,10 @@
 ﻿namespace data_grabber.bl
 {
-    internal interface IInputProcessor
+    internal interface IPageDataHandler
     {
         void Start();
 
-        void Process(FileInfo file);
+        void Handle(PageData data);
 
         void End();
     }

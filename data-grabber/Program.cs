@@ -2,7 +2,6 @@
 using data_grabber.bl;
 using data_grabber.dataout;
 using CommandLine;
-using System.IO;
 
 namespace data_grabber
 {
@@ -18,17 +17,7 @@ namespace data_grabber
             var result = Parser.Default.ParseArguments<Options>(args)
                 .WithParsed(options =>
                 {
-                    var file = options.InputFile;
-                    var folder = options.InputFolder;
-
-                    if (IsSet(options, options.InputFile))
-                    {
-                        ProcessSingeleFile(log, options.InputFile, options.OutputCSV);
-                    }
-                    else
-                    {
-                        RunProgram(log, options.InputFolder, options.OutputCSV);
-                    }
+                    Run(options, log);
                 })
                 .WithNotParsed(e =>
                 {
@@ -37,46 +26,33 @@ namespace data_grabber
                 });
         }
 
-        private static bool IsSet(Options options, string option)
+        private static void Run(Options options, ILogger log)
         {
-            string args = CommandLine.Parser.Default.FormatCommandLine(options, config => config.SkipDefault = true);
-            return args.Contains(option);
+            (IInputProcessor p, FileInfo f) = GetActionParams(options, log);
+            p.Start();
+            p.Process(f);
+            p.End();
         }
 
-        private static void ProcessSingeleFile(ILogger log, string inputFile, string outputFile)
+        private static (IInputProcessor, FileInfo) GetActionParams(Options options, ILogger log)
         {
-            PageParser parser = PageParser.Get(log);
+            IInputProcessor p = GetFileProcessor(log, new OutputDataHandler(new DataWriter(options.OutputCSV), log));
 
-            DataWriter w = new(outputFile);
+            if (options.InputFile != null)
+                return (p, new FileInfo(options.InputFile));
 
-            using StreamReader r = new(inputFile);
-            PageData pageData = parser.Parse(r);
-            if (!pageData.IsEmpty)
-            {
-                w.AddLine(pageData);
-            }
-            else
-            {
-                log.Warn($"{inputFile} did not contain all required information");
-            }
+            IInputProcessor f = GetFolderProcessor(log, p);
+            return (f, new FileInfo(options.InputFolder));
         }
 
-        private static void RunProgram(ILogger log, string path, string outputFile)
+        private static FolderProcessor GetFolderProcessor(ILogger log, IInputProcessor iProcessor)
         {
-            PageParser parser = PageParser.Get(log);
+            return new FolderProcessor(iProcessor, log);
+        }
 
-            DataWriter w = new(outputFile);
-
-            using StreamReader r = new(path);
-            PageData pageData = parser.Parse(r);
-            if (!pageData.IsEmpty)
-            {
-                w.AddLine(pageData);
-            }
-            else
-            {
-                log.Warn($"Document {path} did not contain all required information");
-            }
+        private static FileProcessor GetFileProcessor(ILogger log, IPageDataHandler h)
+        {
+            return new FileProcessor(log, PageParser.Get(log), h);
         }
     }
 }
