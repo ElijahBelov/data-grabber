@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Net.Http;
 
 namespace page_retriever
 {
@@ -14,6 +15,7 @@ namespace page_retriever
         private readonly string path;
         private readonly string path_and_file;
         private readonly string file_name;
+        private HttpResponseMessage? HttpResponse;
 
 
         public Writer(string folder_path, string out_file_name)
@@ -28,7 +30,7 @@ namespace page_retriever
         {
             path = folder_path;
             file_name = out_file_name;
-            path_and_file = path + file_name;
+            path_and_file = Path.Combine(path, file_name);
             writer = w;
         }
 
@@ -37,14 +39,17 @@ namespace page_retriever
             writer.Close();
         }
 
-        internal void Write(string[] info)
+        public void Write()
         {
-            writer.Write(info[0] + "    " + info[1]);
+            writer.Write(HttpResponse);
         }
 
-        public void Request(string url)
+        public async Task Request(string url)
         {
-            writer.Write(url);
+            string baseUri = "https://research.investors.com/";
+            HttpClient httpClient = new() { BaseAddress = new Uri(baseUri) };
+
+            HttpResponse = await httpClient.GetAsync(url);
         }
     }
 }
