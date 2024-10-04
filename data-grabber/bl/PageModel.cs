@@ -6,7 +6,7 @@
 
         public ICollection<string> DataPoints => dataPoints.Keys;
 
-        public string Key => dataPoints["TICKER"];
+        public string Key => "TICKER";
 
         public string XPath(string key) => dataPoints[key];
     }

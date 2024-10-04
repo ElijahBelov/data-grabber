@@ -1,6 +1,7 @@
 ﻿namespace data_grabber.bl
 {
-    internal class DateState
+    enum DataState
     {
+        Processed
     }
 }

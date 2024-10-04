@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "data-grabber": {
+      "commandName": "Project",
+      "commandLineArgs": "-f d:\\Temp\\Root\\In\\APP.htm -o d:\\Temp\\Root\\Out\\data.csv"
+    }
+  }
+}

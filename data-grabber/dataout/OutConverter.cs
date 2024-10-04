@@ -11,7 +11,7 @@ namespace data_grabber.dataout
 
         public static LineData ToLineData(PageData data)
         {
-            return new LineData(data.Key, data.Composite, data.Eps, data.Rs, data.Grouprs, data.Smr, data.Ac, data.ERDate);
+            return new LineData(data.Key, "" + data.Composite, "" + data.Eps, "" + data.Rs, "" + data.Grouprs, data.Smr, data.Ac, data.ERDate);
         }
     }
 }

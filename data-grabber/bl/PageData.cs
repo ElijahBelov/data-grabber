@@ -1,12 +1,13 @@
 ﻿namespace data_grabber.bl
 {
-    internal class PageData(string key, string composite, string eps, string rs, 
+    internal class PageData(string key, int rank, int composite, int eps, int rs,
         string grouprs, string smr, string ac, DateOnly erdate, bool isEmpty = false)
     {
         private readonly string key = key;
-        private readonly string composite = composite;
-        private readonly string eps = eps;
-        private readonly string rs = rs;
+        private readonly int rank = rank;
+        private readonly int composite = composite;
+        private readonly int eps = eps;
+        private readonly int rs = rs;
         private readonly string grouprs = grouprs;
         private readonly string smr = smr;
         private readonly string ac = ac;
@@ -15,11 +16,13 @@
 
         public string Key => key;
 
-        public string Composite => composite;
+        public int Rank => rank;
 
-        public string Eps => eps;
+        public int Composite => composite;
 
-        public string Rs => rs;
+        public int Eps => eps;
+
+        public int Rs => rs;
 
         public string Grouprs => grouprs;
 
@@ -33,8 +36,7 @@
 
         public static PageData Empty
         {
-            get { return new PageData("", "", "", "", "", "", "", DateOnly.MinValue, true); }
+            get { return new PageData("", -1, -1, -1, -1, "", "", "", DateOnly.MinValue, true); }
         }
-
     }
 }

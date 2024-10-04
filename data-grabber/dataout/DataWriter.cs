@@ -1,4 +1,6 @@
 ﻿
+using data_grabber.bl;
+
 namespace data_grabber.dataout
 {
     internal class DataWriter(string path)
@@ -10,14 +12,15 @@ namespace data_grabber.dataout
 
         private readonly string path = path;
 
-        public void AddLine(LineData data)
+        public void AddLine(PageData data)
         {
             File.AppendAllText(path, ToSingleLine(data));
         }
 
-        private static string? ToSingleLine(LineData data)
+        private static string? ToSingleLine(PageData data)
         {
             return data.Key + SEPARATOR
+                + data.Rank + SEPARATOR
                 + data.Composite + SEPARATOR
                 + data.Eps + SEPARATOR
                 + data.Rs + SEPARATOR
